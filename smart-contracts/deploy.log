@@ -1,0 +1,8 @@
+﻿[dotenv@17.2.3] injecting env (3) from .env -- tip: ΓÜÖ∩╕Å  load multiple .env files with { path: ['.env.local', '.env'] }
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ≡ƒæÑ sync secrets across teammates & machines: https://dotenvx.com/ops
+Deploying contracts with the account: 0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266
+EduAuthenticate deployed to: 0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9
+-----------------------------------------
+Action Required:
+1. Copy address '0xDc64a140Aa3E981100a9becA4E685f962f0cF6C9' to frontend/src/contracts/address.js
+2. Copy artifacts/contracts/EduAuthenticate.sol/EduAuthenticate.json content to frontend/src/contracts/EduAuthenticate.json (if ABI changed)
