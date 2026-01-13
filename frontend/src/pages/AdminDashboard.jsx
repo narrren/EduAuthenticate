@@ -5,9 +5,8 @@ import EduAuthenticateArtifact from '../contracts/EduAuthenticate.json';
 // import { EDU_AUTHENTICATE_ADDRESS } from '../contracts/address';
 import { Loader2, CheckCircle, AlertCircle } from 'lucide-react';
 import { ethers } from 'ethers';
-
-// HARDCODED TO FIX IMPORT ISSUE
-const EDU_AUTHENTICATE_ADDRESS = "0x9fE46736679d2D9a65F0992F22722dE9f3c7fa6e0";
+import { getAddress } from 'viem';
+import { EDU_AUTHENTICATE_ADDRESS } from '../contracts/address';
 
 const AdminDashboard = () => {
     const { address, isConnected } = useAccount();
@@ -56,10 +55,11 @@ const AdminDashboard = () => {
                 return;
             }
 
-            setDebugMsg(`Using Address: ${EDU_AUTHENTICATE_ADDRESS}. Sending tx...`);
+            const cleanAddress = getAddress(EDU_AUTHENTICATE_ADDRESS);
+            setDebugMsg(`Using Address: ${cleanAddress}. Sending tx...`);
 
             writeContract({
-                address: EDU_AUTHENTICATE_ADDRESS,
+                address: cleanAddress,
                 abi: EduAuthenticateArtifact.abi,
                 functionName: 'issueCertificate',
                 args: [issueForm.certId, issueForm.docHash, issueForm.recipient || '0x0000000000000000000000000000000000000000', issueForm.metadataURI],
