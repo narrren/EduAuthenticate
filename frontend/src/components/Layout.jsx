@@ -12,7 +12,7 @@ const Layout = () => {
             <footer className="bg-white border-t border-slate-200 py-12">
                 <div className="max-w-7xl mx-auto px-4 text-center">
                     <p className="text-slate-500 text-sm">
-                        &copy; {new Date().getFullYear()} EduAuthenticate. Secured by Polygon.
+                        &copy; {new Date().getFullYear()} EduAuthenticate. Secured by Ethereum.
                     </p>
                 </div>
             </footer>
