@@ -52,7 +52,14 @@ const Verify = () => {
         }
     }, []);
 
-    const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop, accept: { 'application/pdf': ['.pdf'] } });
+    const { getRootProps, getInputProps, isDragActive } = useDropzone({
+        onDrop,
+        accept: {
+            'application/pdf': ['.pdf'],
+            'image/png': ['.png'],
+            'image/jpeg': ['.jpg', '.jpeg']
+        }
+    });
 
     // Result Display Helper
     const renderResult = () => {
