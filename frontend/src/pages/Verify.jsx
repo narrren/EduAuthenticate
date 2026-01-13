@@ -34,7 +34,7 @@ const Verify = () => {
 
     });
 
-    console.log("Verify Debug:", { mode: verificationMode, id: certIdInput, hash: docHash, certData, contract: EDU_AUTHENTICATE_ADDRESS });
+
 
     const onDrop = useCallback(async (acceptedFiles) => {
         if (acceptedFiles.length > 0) {

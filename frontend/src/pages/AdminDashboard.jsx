@@ -5,7 +5,7 @@ import EduAuthenticateArtifact from '../contracts/EduAuthenticate.json';
 // import { EDU_AUTHENTICATE_ADDRESS } from '../contracts/address';
 import { Loader2, CheckCircle, AlertCircle } from 'lucide-react';
 import { ethers } from 'ethers';
-import { getAddress } from 'viem';
+
 import { EDU_AUTHENTICATE_ADDRESS } from '../contracts/address';
 
 const AdminDashboard = () => {
@@ -43,34 +43,19 @@ const AdminDashboard = () => {
     const { isLoading: isTxLoading, isSuccess: isTxSuccess } = useWaitForTransactionReceipt({ hash });
 
     // Debug State
-    const [debugMsg, setDebugMsg] = useState('');
+
 
     const handleIssue = async (e) => {
         e.preventDefault();
-        setDebugMsg("Starting process...");
 
-        try {
-            if (!writeContract) {
-                setDebugMsg("Error: writeContract not available. Connect wallet?");
-                return;
-            }
+        if (!writeContract) return;
 
-            const cleanAddress = getAddress(EDU_AUTHENTICATE_ADDRESS);
-            setDebugMsg(`Using Address: ${cleanAddress}. Sending tx...`);
-
-            writeContract({
-                address: cleanAddress,
-                abi: EduAuthenticateArtifact.abi,
-                functionName: 'issueCertificate',
-                args: [issueForm.certId, issueForm.docHash, issueForm.recipient || '0x0000000000000000000000000000000000000000', issueForm.metadataURI],
-            }, {
-                onError: (err) => setDebugMsg(`Tx Failed: ${err.message}`),
-            });
-
-        } catch (err) {
-            console.error(err);
-            setDebugMsg(`Unexpected Error: ${err.message}`);
-        }
+        writeContract({
+            address: EDU_AUTHENTICATE_ADDRESS,
+            abi: EduAuthenticateArtifact.abi,
+            functionName: 'issueCertificate',
+            args: [issueForm.certId, issueForm.docHash, issueForm.recipient || '0x0000000000000000000000000000000000000000', issueForm.metadataURI],
+        });
     };
 
     const handleRevoke = async (e) => {
@@ -102,13 +87,7 @@ const AdminDashboard = () => {
                 {isTxLoading && <div className="mb-4 text-blue-600 flex items-center gap-2"><Loader2 className="animate-spin" /> Transaction Processing...</div>}
                 {isTxSuccess && <div className="mb-4 text-green-600 flex items-center gap-2"><CheckCircle /> Access Successful</div>}
 
-                {/* Debug Message Box */}
-                {debugMsg && (
-                    <div className="mb-6 p-4 bg-slate-900 text-white font-mono text-sm rounded-lg whitespace-pre-wrap break-all border-l-4 border-yellow-500 shadow-lg">
-                        <strong className="text-yellow-400 block mb-1">DEBUG LOG:</strong>
-                        {debugMsg}
-                    </div>
-                )}
+
 
                 {writeError && <div className="mb-4 text-red-600 flex items-center gap-2"><AlertCircle /> {writeError.shortMessage || writeError.message}</div>}
 
